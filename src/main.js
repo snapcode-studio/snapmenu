@@ -1,7 +1,6 @@
-// Usunięto import CSS stąd
 import { logIn, signUp, listenAuthState, logOut } from './auth';
 
-let isLoginMode = true;
+let isLoginMode = localStorage.getItem('hasLoggedBefore') === 'true';
 
 const authForm = document.getElementById('authForm');
 const emailInput = document.getElementById('email');
@@ -11,6 +10,33 @@ const authTitle = document.getElementById('authTitle');
 const authSubmitBtn = document.getElementById('authSubmitBtn');
 const authError = document.getElementById('authError');
 const navLogoutBtn = document.getElementById('navLogoutBtn');
+
+function updateAuthUI() {
+  if (isLoginMode) {
+    if (authTitle) authTitle.innerText = "Zaloguj się";
+    if (authSubmitBtn) authSubmitBtn.innerText = "Zaloguj";
+    if (toggleAuthModeBtn) toggleAuthModeBtn.innerText = "Nie masz konta? Zarejestruj się";
+  } else {
+    if (authTitle) authTitle.innerText = "Załóż konto";
+    if (authSubmitBtn) authSubmitBtn.innerText = "Zarejestruj";
+    if (toggleAuthModeBtn) toggleAuthModeBtn.innerText = "Masz już konto? Zaloguj się";
+  }
+  if (authError) authError.innerText = "";
+  if (emailInput) emailInput.style.borderColor = '';
+  if (passwordInput) passwordInput.style.borderColor = '';
+}
+
+if (authForm) updateAuthUI();
+
+emailInput?.addEventListener('input', () => {
+  emailInput.style.borderColor = '';
+  authError.innerText = '';
+});
+
+passwordInput?.addEventListener('input', () => {
+  passwordInput.style.borderColor = '';
+  authError.innerText = '';
+});
 
 listenAuthState((user) => {
   if (user) {
@@ -28,16 +54,7 @@ navLogoutBtn?.addEventListener('click', async () => await logOut());
 toggleAuthModeBtn?.addEventListener('click', (e) => {
   e.preventDefault();
   isLoginMode = !isLoginMode;
-  if (isLoginMode) {
-    authTitle.innerText = "Zaloguj się";
-    authSubmitBtn.innerText = "Zaloguj";
-    toggleAuthModeBtn.innerText = "Nie masz konta? Zarejestruj się";
-  } else {
-    authTitle.innerText = "Załóż konto";
-    authSubmitBtn.innerText = "Zarejestruj";
-    toggleAuthModeBtn.innerText = "Masz już konto? Zaloguj się";
-  }
-  authError.innerText = "";
+  updateAuthUI();
 });
 
 authForm?.addEventListener('submit', async (e) => {
@@ -52,8 +69,18 @@ authForm?.addEventListener('submit', async (e) => {
     } else {
       await signUp(emailInput.value, passwordInput.value);
     }
+    localStorage.setItem('hasLoggedBefore', 'true');
   } catch (error) {
-    authError.innerText = "Błąd: Sprawdź dane i spróbuj ponownie.";
+    let errMsg = "Błąd: Sprawdź dane i spróbuj ponownie.";
+    if (error.code === 'auth/email-already-in-use') errMsg = "Konto z tym e-mailem już istnieje.";
+    else if (error.code === 'auth/wrong-password') errMsg = "Nieprawidłowe hasło.";
+    else if (error.code === 'auth/user-not-found') errMsg = "Nie znaleziono użytkownika.";
+    else if (error.code === 'auth/weak-password') errMsg = "Hasło jest zbyt słabe (min. 6 znaków).";
+    else if (error.code === 'auth/invalid-email') errMsg = "Nieprawidłowy adres e-mail.";
+    
+    authError.innerText = errMsg;
+    emailInput.style.borderColor = '#ff453a';
+    passwordInput.style.borderColor = '#ff453a';
     authSubmitBtn.disabled = false;
     authSubmitBtn.innerText = isLoginMode ? "Zaloguj" : "Zarejestruj";
   }

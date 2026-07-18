@@ -1,0 +1,20 @@
+{
+  "name": "snapqr",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^8.1.1"
+  },
+  "dependencies": {
+    "firebase": "^12.16.0",
+    "qr-code-styling": "^1.9.2",
+    "qrcode": "^1.5.4",
+    "sortablejs": "^1.15.7"
+  }
+}

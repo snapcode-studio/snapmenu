@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Menu Restauracji</title>
+    <link rel="icon" type="image/webp" href="/favicon.webp">
+    <link rel="stylesheet" href="/src/style.css">
+  </head>
+  <body id="menuBody" style="transition: background-color 0.5s ease, color 0.5s ease; min-height: 100vh;">
+    
+    <div class="public-menu animate-fade-up" style="max-width: 768px; margin: 0 auto; padding: 4vw 2vw;">
+      <div style="text-align:center; margin-bottom: 3.5rem;">
+        <h1 id="menuHeader" style="font-size: clamp(32px, 8vw, 56px); font-weight:700; letter-spacing:-0.03em; margin-bottom:0.5rem; transition: font-family 0.3s ease;">Nasze Menu</h1>
+        <p style="opacity:0.6; font-size:1rem; letter-spacing: 0.05em; text-transform:uppercase;">Zamów co lubisz najbardziej</p>
+      </div>
+
+      <div id="loadingIndicator" style="text-align:center; padding: 4rem; opacity:0.5; font-family:'Geist Mono', monospace;">
+        Trwa ładowanie pyszności...
+      </div>
+
+      <div id="publicMenuList" style="display:flex; flex-direction:column; gap:16px;">
+        <!-- Renderowane Menu -->
+      </div>
+      
+      <div style="text-align:center; margin-top: 6rem; padding-top: 2rem; opacity:0.6; border-top: 1px solid rgba(255,255,255,0.1);">
+        <p style="font-size:13px; font-family:'Inter', sans-serif;">
+          Menu napędza <a href="https://qr.getsnap.space" target="_blank" style="font-weight:700; color:inherit; text-decoration:underline; text-decoration-color: rgba(255,255,255,0.3); text-underline-offset: 4px;">SnapQR</a> 
+          od <a href="https://getsnap.space" target="_blank" style="font-weight:700; color:inherit; text-decoration:underline; text-decoration-color: rgba(255,255,255,0.3); text-underline-offset: 4px;">Snap Code Studio</a>.
+        </p>
+      </div>
+    </div>
+
+    <script type="module" src="/src/menu.js"></script>
+  </body>
+</html>

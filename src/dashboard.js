@@ -28,6 +28,7 @@ async function claimMenuSlug(uid, newSlug, oldSlug, lastChange) {
 
 const logoutBtn = document.getElementById('logoutBtn');
 const dashboardContent = document.getElementById('dashboardContent');
+const qrcodeWrapper = document.getElementById('qrcodeWrapper');
 const qrcodeContainer = document.getElementById('qrcode');
 const publicLink = document.getElementById('publicLink');
 const downloadQrBtn = document.getElementById('downloadQrBtn');
@@ -170,9 +171,9 @@ listenAuthState((user) => {
       downloadQrBtn.innerText = "Pobieranie...";
       downloadQrBtn.disabled = true;
       try {
-        const canvas = await html2canvas(qrcodeContainer, {
+        const canvas = await html2canvas(qrcodeWrapper, {
           backgroundColor: null,
-          scale: 4, // High quality
+          scale: 6, // High quality
           useCORS: true
         });
         const link = document.createElement('a');

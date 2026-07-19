@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pl">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SnapQR - Panel Restauratora</title>
+    <title>SnapMenu - Panel Restauratora</title>
     <link rel="icon" type="image/webp" href="/favicon.webp">
     <link rel="stylesheet" href="/src/style.css">
   </head>
@@ -12,7 +12,7 @@
       <div class="navbar__bar glass animate-fade-up" style="animation-delay: 0.1s;">
         <div class="logo-wrap">
           <img src="/logo.webp" alt="Logo" class="logo-img" onerror="this.style.display='none'">
-          SnapQR Panel
+          SnapMenu Panel
         </div>
         <button id="logoutBtn" class="btn btn-secondary" style="width:auto; padding: 6px 16px; font-size:13px;">Wyloguj</button>
       </div>
@@ -20,36 +20,36 @@
 
     <div class="container dashboard-grid animate-fade-up" id="dashboardContent" style="display:none; animation-delay: 0.2s;">
       
-      <!-- Panel Boczny: Kod QR i Wygląd -->
+      <!-- Panel Boczny: Kod QR i WyglÄ…d -->
       <div class="sidebar card" style="display:flex; flex-direction:column; gap:2rem; align-self: start;">
         
         <div>
-          <h3>Twój Kod QR</h3>
-          <p style="font-size:0.85rem; margin-bottom:1rem; color:var(--text-secondary);">Zeskanuj, aby zobaczyć menu. Wydrukuj na stoliki.</p>
+          <h3>TwĂłj Kod QR</h3>
+          <p style="font-size:0.85rem; margin-bottom:1rem; color:var(--text-secondary);">Zeskanuj, aby zobaczyÄ‡ menu. Wydrukuj na stoliki.</p>
           <div id="qrcode" style="background:#fff; border-radius:32px;"></div>
           
           <div style="margin-top:1.5rem; display:flex; flex-direction:column; gap:10px;">
             <button id="downloadQrBtn" class="btn btn-primary" style="font-size: 14px; padding: 12px;">Pobierz Kod (PNG)</button>
             <a id="publicLink" href="#" target="_blank" class="btn btn-secondary" style="font-size: 14px; padding: 12px; text-decoration:none;">
-              Otwórz publiczne menu ↗
+              OtwĂłrz publiczne menu â†—
             </a>
           </div>
         </div>
 
         <div style="border-top:1px solid var(--border-light); padding-top:1.5rem;">
-          <h3 style="margin-bottom:1.5rem;">Marka i Wygląd</h3>
+          <h3 style="margin-bottom:1.5rem;">Marka i WyglÄ…d</h3>
           <form id="themeForm">
             <span class="input-label">Nazwa Restauracji</span>
             <input type="text" id="restaurantNameInput" placeholder="Np. U Kasi" />
 
-            <span class="input-label" style="margin-top:1rem;">Kolor Tła</span>
+            <span class="input-label" style="margin-top:1rem;">Kolor TĹ‚a</span>
             <div class="swatch-grid" id="bgSwatches">
               <div class="swatch" data-color="#000000" style="background:#000000;">Onyx</div>
               <div class="swatch" data-color="#1c1c1e" style="background:#1c1c1e;">Grafit</div>
               <div class="swatch" data-color="#f5f5f7" style="background:#f5f5f7; color:#000;">Biel</div>
               <div class="swatch" data-color="#3b2f2f" style="background:#3b2f2f;">Bordo</div>
               <div class="swatch" data-color="#1a252c" style="background:#1a252c;">Granat</div>
-              <div class="swatch" data-color="#d4c4b7" style="background:#d4c4b7; color:#000;">Beż</div>
+              <div class="swatch" data-color="#d4c4b7" style="background:#d4c4b7; color:#000;">BeĹĽ</div>
             </div>
             
             <span class="input-label" style="margin-top:1.5rem;">Czcionka (Typografia)</span>
@@ -63,18 +63,18 @@
 
       </div>
 
-      <!-- Prawa Strona: Zarządzanie Menu -->
+      <!-- Prawa Strona: ZarzÄ…dzanie Menu -->
       <div class="main-content card">
-        <h2 style="margin-bottom:0.25rem;">Zarządzaj Menu</h2>
-        <p style="font-size:0.85rem; margin-bottom:1.5rem; color:var(--text-secondary);">Dodawaj i przeciągaj dania (⋮⋮), aby zmienić kolejność wyświetlania.</p>
+        <h2 style="margin-bottom:0.25rem;">ZarzÄ…dzaj Menu</h2>
+        <p style="font-size:0.85rem; margin-bottom:1.5rem; color:var(--text-secondary);">Dodawaj i przeciÄ…gaj dania (â‹®â‹®), aby zmieniÄ‡ kolejnoĹ›Ä‡ wyĹ›wietlania.</p>
         
         <form id="addItemForm" style="display:flex; gap:16px; margin-bottom:2.5rem; flex-wrap:wrap; background: rgba(255,255,255,0.02); padding: 24px; border-radius: 16px; border: 1px solid var(--border-light);">
           <div style="flex:1; min-width:240px;">
             <input type="text" id="itemName" placeholder="Nazwa dania (np. Burger Drwala)" required style="margin-bottom:12px;"/>
-            <input type="text" id="itemDesc" placeholder="Opis (np. Wołowina, ser, bekon)" style="margin-bottom:0;" />
+            <input type="text" id="itemDesc" placeholder="Opis (np. WoĹ‚owina, ser, bekon)" style="margin-bottom:0;" />
           </div>
           <div style="width:160px; display:flex; flex-direction:column; gap:12px; min-width:160px;">
-            <input type="number" id="itemPrice" placeholder="Cena (zł)" step="0.01" required style="margin-bottom:0;" />
+            <input type="number" id="itemPrice" placeholder="Cena (zĹ‚)" step="0.01" required style="margin-bottom:0;" />
             <button type="submit" class="btn btn-primary" id="addItemBtn">Dodaj danie</button>
           </div>
         </form>
@@ -89,3 +89,4 @@
     <script type="module" src="/src/dashboard.js"></script>
   </body>
 </html>
+

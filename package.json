@@ -1,5 +1,5 @@
-{
-  "name": "snapqr",
+﻿{
+  "name": "SnapMenu",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -18,3 +18,4 @@
     "sortablejs": "^1.15.7"
   }
 }
+

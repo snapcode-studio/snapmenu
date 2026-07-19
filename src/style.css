@@ -137,9 +137,10 @@ nav { position: sticky; top: 0; z-index: 100; padding: clamp(10px, 2vw, 20px); }
 
 .drag-handle { cursor: grab; padding: 0 15px 0 0; color: var(--text-muted); font-size: 1.4rem; transition: color 0.2s; }
 .drag-handle:hover { color: var(--text-primary); }
-.item-info { flex: 1; padding: 0 15px; }
-.item-info h3 { font-size: 18px; margin-bottom: 6px; letter-spacing: -0.01em; }
-.item-price { font-family: 'Geist Mono', monospace; font-size: 16px; font-weight: 500; }
+.item-info { flex: 1; padding: 0 15px; overflow: hidden; }
+.item-info h3 { font-size: 18px; margin-bottom: 6px; letter-spacing: -0.01em; word-break: break-word; overflow-wrap: break-word; hyphens: auto; }
+.item-info p { word-break: break-word; overflow-wrap: break-word; white-space: pre-wrap; }
+.item-price { font-family: 'Geist Mono', monospace; font-size: 16px; font-weight: 500; white-space: nowrap; }
 
 /* Enhanced Delete Button */
 .delete-btn { 

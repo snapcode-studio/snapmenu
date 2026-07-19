@@ -4,7 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SnapMenu - Cyfrowe Menu Premium</title>
-    <link rel="icon" type="image/webp" href="/favicon.webp">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <link rel="stylesheet" href="/src/style.css">
   </head>
   <body>
@@ -21,22 +25,22 @@
     <div class="container hero" id="landingSection">
       <div class="hero-content animate-fade-up" style="animation-delay: 0.2s;">
         <h1>Cyfrowe Menu.<br>Design klasy<br>Premium.</h1>
-        <p style="font-size: 1.1rem; margin-top: 1rem; max-width: 400px;">ZarzÄ…dzaj menu i swoim wizerunkiem.</p>
+        <p style="font-size: 1.1rem; margin-top: 1rem; max-width: 400px;">Zarządzaj menu i swoim wizerunkiem.</p>
       </div>
 
       <div class="auth-box card animate-fade-up" style="animation-delay: 0.3s;">
-        <h2 id="authTitle" style="margin-bottom: 1.5rem;">Zaloguj siÄ™</h2>
+        <h2 id="authTitle" style="margin-bottom: 1.5rem;">Zaloguj się</h2>
         <form id="authForm">
           <input type="email" id="email" placeholder="Adres e-mail" required />
-          <input type="password" id="password" placeholder="HasĹ‚o" required />
+          <input type="password" id="password" placeholder="Hasło" required />
           <div id="forgotPasswordWrap" style="text-align: right; margin-top: -4px; margin-bottom: 12px;">
-            <a href="#" id="forgotPasswordBtn" style="color:var(--text-secondary); text-decoration:none; font-size:0.85rem; transition: color 0.2s;">ZapomniaĹ‚eĹ› hasĹ‚a?</a>
+            <a href="#" id="forgotPasswordBtn" style="color:var(--text-secondary); text-decoration:none; font-size:0.85rem; transition: color 0.2s;">Zapomniałeś hasła?</a>
           </div>
           <button type="submit" class="btn btn-primary" id="authSubmitBtn">Rozpocznij</button>
         </form>
         <p style="text-align:center; margin-top:1.5rem; font-size:0.9rem;">
           <a href="#" id="toggleAuthMode" style="color:var(--text-secondary); text-decoration:none; font-weight:500; transition: color 0.2s;">
-            Nie masz konta? Zarejestruj siÄ™
+            Nie masz konta? Zarejestruj się
           </a>
         </p>
         <div id="authError" style="color:#ff453a; text-align:center; margin-top:1rem; font-size:0.9rem;"></div>

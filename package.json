@@ -1,4 +1,4 @@
-﻿{
+{
   "name": "SnapMenu",
   "version": "0.0.0",
   "private": true,
@@ -13,9 +13,9 @@
   },
   "dependencies": {
     "firebase": "^12.16.0",
+    "html2canvas": "^1.4.1",
     "qr-code-styling": "^1.9.2",
     "qrcode": "^1.5.4",
     "sortablejs": "^1.15.7"
   }
 }
-

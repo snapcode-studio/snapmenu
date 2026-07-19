@@ -3,6 +3,28 @@ import { addMenuItem, deleteMenuItem, listenToMenu, updateMenuOrder, saveTheme, 
 import Sortable from 'sortablejs';
 import QRCodeStyling from 'qr-code-styling';
 import html2canvas from 'html2canvas';
+import { db } from './firebase-config';
+import { doc, getDoc, setDoc, deleteDoc } from 'firebase/firestore';
+
+// ── Slug Utils (inline) ───────────────────────────────────────────
+const SLUG_REGEX = /^[a-z0-9-]{3,30}$/;
+const SLUG_COOLDOWN_H = 24;
+
+async function checkMenuSlugAvailable(slug, uid) {
+  const snap = await getDoc(doc(db, 'menuSlugs', slug));
+  if (!snap.exists()) return { available: true };
+  return snap.data().uid === uid ? { available: false, isOwn: true } : { available: false, isOwn: false };
+}
+
+async function claimMenuSlug(uid, newSlug, oldSlug, lastChange) {
+  if (lastChange) {
+    const diffH = (Date.now() - new Date(lastChange).getTime()) / 3600000;
+    if (diffH < SLUG_COOLDOWN_H) throw new Error(`Zmień ponownie za ${Math.ceil(SLUG_COOLDOWN_H - diffH)}h.`);
+  }
+  if (oldSlug && oldSlug !== newSlug) { try { await deleteDoc(doc(db, 'menuSlugs', oldSlug)); } catch {} }
+  await setDoc(doc(db, 'menuSlugs', newSlug), { uid, claimedAt: new Date().toISOString() });
+  await setDoc(doc(db, 'users', uid, 'settings', 'slug'), { slug: newSlug, lastChange: new Date().toISOString() }, { merge: true });
+}
 
 const logoutBtn = document.getElementById('logoutBtn');
 const dashboardContent = document.getElementById('dashboardContent');
@@ -40,7 +62,76 @@ listenAuthState((user) => {
   if (user) {
     currentUser = user;
     dashboardContent.style.display = 'grid';
-    
+
+    // ── Slug Editor ──────────────────────────────────────────────────
+    const slugInput = document.getElementById('slugInput');
+    const slugConfirmBtn = document.getElementById('slugConfirmBtn');
+    const slugMsg = document.getElementById('slugMsg');
+    let slugTimer = null;
+    let currentSlug = null;
+    let lastSlugChange = null;
+
+    // Load existing slug
+    getDoc(doc(db, 'users', user.uid, 'settings', 'slug')).then(snap => {
+      if (snap.exists()) {
+        currentSlug = snap.data().slug;
+        lastSlugChange = snap.data().lastChange;
+        slugInput.value = currentSlug;
+        slugInput.style.borderColor = 'rgba(255,255,255,0.2)';
+      }
+    });
+
+    slugInput.addEventListener('input', () => {
+      const val = slugInput.value.toLowerCase().replace(/[^a-z0-9-]/g, '');
+      slugInput.value = val;
+      slugConfirmBtn.style.display = 'none';
+      if (slugTimer) clearTimeout(slugTimer);
+      if (!val || val === currentSlug) { slugMsg.textContent = ''; slugInput.style.borderColor = ''; return; }
+      if (!SLUG_REGEX.test(val)) {
+        slugMsg.textContent = 'Min 3 znaki, tylko a-z, 0-9, myślnik.';
+        slugMsg.style.color = '#ff453a';
+        slugInput.style.borderColor = '#ff453a';
+        return;
+      }
+      slugMsg.textContent = 'Sprawdzam...';
+      slugMsg.style.color = 'var(--text-muted)';
+      slugTimer = setTimeout(async () => {
+        const res = await checkMenuSlugAvailable(val, user.uid);
+        if (res.available) {
+          slugMsg.textContent = '✓ Dostępny!';
+          slugMsg.style.color = '#4ade80';
+          slugInput.style.borderColor = '#4ade80';
+          slugConfirmBtn.style.display = 'flex';
+        } else {
+          slugMsg.textContent = '✗ Zajęty.';
+          slugMsg.style.color = '#ff453a';
+          slugInput.style.borderColor = '#ff453a';
+          slugConfirmBtn.style.display = 'none';
+        }
+      }, 600);
+    });
+
+    slugConfirmBtn.addEventListener('click', async () => {
+      const val = slugInput.value;
+      if (!SLUG_REGEX.test(val)) return;
+      try {
+        await claimMenuSlug(user.uid, val, currentSlug, lastSlugChange);
+        currentSlug = val;
+        lastSlugChange = new Date().toISOString();
+        slugMsg.textContent = '✓ Zapisano! Twój link: menu.getsnap.space/m/' + val;
+        slugMsg.style.color = '#4ade80';
+        slugConfirmBtn.style.display = 'none';
+        slugInput.style.borderColor = 'rgba(255,255,255,0.2)';
+        // Update public link and QR
+        const newUrl = `${window.location.origin}/menu.html?id=${user.uid}`;
+        publicLink.href = newUrl;
+      } catch(e) {
+        slugMsg.textContent = e.message;
+        slugMsg.style.color = '#ff453a';
+      }
+    });
+    // ─────────────────────────────────────────────────────────────────
+
     const menuUrl = `${window.location.origin}/menu.html?id=${user.uid}`;
     publicLink.href = menuUrl;
 

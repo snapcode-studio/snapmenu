@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pl">
   <head>
     <meta charset="UTF-8" />
@@ -27,6 +27,7 @@
       <!-- Panel Boczny: Kod QR i Wygląd -->
       <div class="sidebar card" style="display:flex; flex-direction:column; gap:2rem; align-self: start;">
         
+        <!-- QR Code -->
         <div>
           <h3>Twój Kod QR</h3>
           <p style="font-size:0.85rem; margin-bottom:1rem; color:var(--text-secondary);">Zeskanuj, aby zobaczyć menu. Wydrukuj na stoliki.</p>
@@ -40,6 +41,19 @@
           </div>
         </div>
 
+        <!-- Custom Slug -->
+        <div style="border-top:1px solid var(--border-light); padding-top:1.5rem;">
+          <h3 style="margin-bottom:0.5rem;">Własny Link Menu</h3>
+          <p style="font-size:0.8rem; color:var(--text-secondary); margin-bottom:1rem;">Zmień adres URL swojego menu na łatwą do zapamiętania nazwę.</p>
+          <span style="display:block; font-size:11px; font-family:'Geist Mono',monospace; color:var(--text-secondary); margin-bottom:6px; text-transform:uppercase; letter-spacing:0.05em;">menu.getsnap.space/m/</span>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <input type="text" id="slugInput" placeholder="twojamarka" style="margin-bottom:0; font-family:'Geist Mono',monospace; font-size:14px; flex:1;" />
+            <button id="slugConfirmBtn" title="Zatwierdź" style="display:none; background:#4ade80; border:none; border-radius:8px; padding:10px 14px; cursor:pointer; color:#000; font-weight:700; font-size:16px; flex-shrink:0; transition: all 0.2s;">✓</button>
+          </div>
+          <p id="slugMsg" style="font-size:11px; font-family:'Geist Mono',monospace; margin-top:5px; min-height:16px;"></p>
+        </div>
+
+        <!-- Marka i Wygląd -->
         <div style="border-top:1px solid var(--border-light); padding-top:1.5rem;">
           <h3 style="margin-bottom:1.5rem;">Marka i Wygląd</h3>
           <form id="themeForm">
@@ -93,4 +107,3 @@
     <script type="module" src="/src/dashboard.js"></script>
   </body>
 </html>
-

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://menu.getsnap.space/sitemap.xml

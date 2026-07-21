@@ -35,11 +35,14 @@ if (!restaurantId) {
 }
 
 function renderWidgetMenu(items) {
+  const pitchOverlay = document.getElementById('pitchOverlay');
   widgetList.innerHTML = '';
   
   if(items.length === 0) {
-    widgetList.innerHTML = '<p style="text-align:center; opacity:0.5; padding: 1rem 0; font-size: 0.9rem;">Menu wkrótce...</p>';
+    pitchOverlay.classList.add('active');
     return;
+  } else {
+    pitchOverlay.classList.remove('active');
   }
 
   items.forEach((item) => {

@@ -32,6 +32,47 @@
       .widget-container::-webkit-scrollbar {
         display: none;
       }
+      .pitch-overlay {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(10, 10, 12, 0.6);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        z-index: 10;
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+      .pitch-overlay.active {
+        display: flex;
+      }
+      .pitch-overlay h3 {
+        margin: 0 0 10px 0;
+        font-size: 1.2rem;
+      }
+      .pitch-overlay p {
+        margin: 0 0 20px 0;
+        font-size: 0.9rem;
+        opacity: 0.8;
+      }
+      .pitch-btn {
+        background: #b71c1c;
+        color: white;
+        text-decoration: none;
+        padding: 12px 24px;
+        border-radius: 50px;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        transition: background 0.3s;
+      }
+      .pitch-btn:hover {
+        background: #e53935;
+      }
       .widget-header {
         font-weight: 700;
         font-size: 1.2rem;
@@ -96,6 +137,12 @@
   </head>
   <body id="widgetBody">
     <div class="widget-container" id="widgetContainer">
+      <div id="pitchOverlay" class="pitch-overlay">
+        <h3>Zbuduj nowoczesne menu!</h3>
+        <p>Wygląd dostosowany pod Twoją markę.</p>
+        <a href="https://getsnap.space" target="_blank" class="pitch-btn">Skonfiguruj swoje menu</a>
+      </div>
+      
       <div class="widget-header">
         <span id="widgetTitle">Nasze Menu</span>
       </div>

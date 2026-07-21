@@ -1,1 +1,1 @@
-/:slug/widget /widget.html?id=:slug 200
+/widget/* /widget.html?id=:splat 200

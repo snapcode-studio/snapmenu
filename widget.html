@@ -15,19 +15,16 @@
         overflow: hidden;
         background: transparent;
         scrollbar-width: none;
+        color: #fff;
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
       }
       body::-webkit-scrollbar {
         display: none;
       }
       .widget-container {
-        padding: 20px;
-        border-radius: 20px;
-        background: rgba(12, 12, 16, 0.85);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
+        padding: 16px 20px;
+        background: transparent;
         color: #fff;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        font-family: 'Inter', system-ui, -apple-system, sans-serif;
         box-sizing: border-box;
         position: relative;
         min-height: 100vh;
@@ -38,9 +35,9 @@
       .pitch-overlay {
         position: absolute;
         top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(10, 10, 14, 0.75);
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
+        background: rgba(10, 10, 14, 0.85);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
         z-index: 10;
         display: none;
         flex-direction: column;
@@ -49,48 +46,75 @@
         text-align: center;
         padding: 24px;
         box-sizing: border-box;
-        border-radius: 20px;
+        border-radius: 18px;
       }
       .pitch-overlay.active {
         display: flex;
+      }
+      .pitch-badge {
+        display: inline-block;
+        padding: 4px 12px;
+        background: rgba(212, 175, 55, 0.15);
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        color: #e5b842;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 12px;
       }
       .pitch-overlay h3 {
         margin: 0 0 10px 0;
         font-size: 1.35rem;
         font-weight: 700;
         letter-spacing: -0.01em;
+        color: #fff;
       }
       .pitch-overlay p {
-        margin: 0 0 22px 0;
-        font-size: 0.92rem;
-        opacity: 0.85;
-        max-width: 540px;
+        margin: 0 0 20px 0;
+        font-size: 0.9rem;
+        opacity: 0.8;
+        max-width: 500px;
         line-height: 1.45;
       }
       .pitch-btn {
-        background: linear-gradient(135deg, #c62828 0%, #b71c1c 100%);
-        color: white;
+        background: linear-gradient(135deg, #d4af37 0%, #aa841c 100%);
+        color: #000;
         text-decoration: none;
-        padding: 13px 28px;
+        padding: 12px 26px;
         border-radius: 50px;
-        font-weight: 600;
+        font-weight: 700;
         font-size: 0.85rem;
         letter-spacing: 0.5px;
-        transition: transform 0.25s, box-shadow 0.25s, background 0.25s;
-        box-shadow: 0 6px 20px rgba(183, 28, 28, 0.4);
+        transition: transform 0.25s, box-shadow 0.25s;
+        box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35);
       }
       .pitch-btn:hover {
         transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(229, 57, 53, 0.5);
-        background: linear-gradient(135deg, #e53935 0%, #c62828 100%);
+        box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
       }
       .widget-header {
-        font-weight: 700;
-        font-size: 1.25rem;
         margin-bottom: 14px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+      }
+      .widget-title-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .widget-live-dot {
+        width: 8px;
+        height: 8px;
+        background-color: #38ef7d;
+        border-radius: 50%;
+        box-shadow: 0 0 10px #38ef7d;
+      }
+      .widget-title {
+        font-weight: 700;
+        font-size: 1.25rem;
         letter-spacing: -0.01em;
       }
       #widgetList {
@@ -101,19 +125,20 @@
         flex-grow: 1;
       }
       .widget-item {
-        background: rgba(255, 255, 255, 0.04);
+        background: rgba(255, 255, 255, 0.035);
         border: 1px solid rgba(255, 255, 255, 0.08);
         border-radius: 14px;
         padding: 14px 16px;
-        transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+        transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
       }
       .widget-item:hover {
-        transform: translateY(-2px);
-        background: rgba(255, 255, 255, 0.08);
-        border-color: rgba(255, 255, 255, 0.18);
+        transform: translateY(-3px);
+        background: rgba(255, 255, 255, 0.07);
+        border-color: rgba(212, 175, 55, 0.35);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
       }
       .widget-item-header {
         display: flex;
@@ -126,12 +151,17 @@
         font-weight: 600;
         font-size: 0.95rem;
         line-height: 1.3;
+        color: #ffffff;
       }
       .widget-item-price {
         font-family: 'Geist Mono', monospace;
         font-weight: 600;
-        color: #d4af37;
-        font-size: 0.9rem;
+        background: rgba(212, 175, 55, 0.12);
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        color: #e5b842;
+        padding: 3px 9px;
+        border-radius: 20px;
+        font-size: 0.85rem;
         white-space: nowrap;
       }
       .widget-item-desc {
@@ -141,39 +171,48 @@
       }
       .widget-footer {
         text-align: center;
-        margin-top: 10px;
+        margin-top: 8px;
         font-size: 0.75rem;
-        opacity: 0.7;
+        opacity: 0.6;
       }
       .widget-footer a {
         color: inherit;
         font-weight: 700;
+        text-decoration: none;
+      }
+      .widget-footer a:hover {
+        text-decoration: underline;
       }
       .btn-full-menu {
         display: block;
         width: 100%;
         padding: 11px;
-        background: rgba(255, 255, 255, 0.08);
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        border-radius: 12px;
-        color: #fff;
+        background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.05) 100%);
+        border: 1px solid rgba(212, 175, 55, 0.35);
+        border-radius: 50px;
+        color: #f5cf68;
         font-weight: 600;
-        font-size: 0.9rem;
+        font-size: 0.85rem;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
         text-align: center;
         text-decoration: none;
         margin-top: 10px;
-        transition: background 0.3s, border-color 0.3s;
+        transition: all 0.3s ease;
         cursor: pointer;
       }
       .btn-full-menu:hover {
-        background: rgba(255, 255, 255, 0.16);
-        border-color: rgba(255, 255, 255, 0.25);
+        background: linear-gradient(135deg, #d4af37 0%, #aa841c 100%);
+        color: #000000;
+        box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35);
+        border-color: transparent;
       }
     </style>
   </head>
   <body id="widgetBody">
     <div class="widget-container" id="widgetContainer">
       <div id="pitchOverlay" class="pitch-overlay">
+        <span class="pitch-badge">SNAPMENU DIGITAL</span>
         <h3 id="pitchTitle">Przejmij ten link i skonfiguruj menu!</h3>
         <p id="pitchDesc">Jesteś właścicielem? Skonfiguruj cyfrowe menu dla swojej firmy w 2 minuty.</p>
         <a href="/dashboard.html" target="_blank" id="pitchBtn" class="pitch-btn">Skonfiguruj menu dla swojej firmy</a>
@@ -181,7 +220,10 @@
       
       <div>
         <div class="widget-header">
-          <span id="widgetTitle">Nasze Menu</span>
+          <div class="widget-title-wrapper">
+            <div class="widget-live-dot"></div>
+            <span id="widgetTitle" class="widget-title">Nasze Menu</span>
+          </div>
         </div>
         <div id="widgetLoading" style="text-align:center; padding:20px; opacity:0.5;">Ładowanie...</div>
         <div id="widgetList"></div>

@@ -11,9 +11,11 @@ let restaurantId = urlParams.get('id');
 
 // Fallback for clean URL structure e.g. /w/masalabar
 if (!restaurantId) {
-  const pathParts = window.location.pathname.split('/');
-  if (pathParts.length >= 3 && pathParts[1] === 'w') {
-    restaurantId = pathParts[2];
+  const pathParts = window.location.pathname.split('/').filter(Boolean);
+  if (pathParts.length >= 2 && pathParts[0] === 'w') {
+    restaurantId = pathParts[1];
+  } else if (pathParts.length === 1 && pathParts[0] !== 'widget' && pathParts[0] !== 'widget.html') {
+    restaurantId = pathParts[0];
   }
 }
 
@@ -26,9 +28,9 @@ if (!restaurantId) {
   
   // Theme
   listenToTheme(restaurantId, (theme) => {
-    widgetContainer.style.backgroundColor = theme.bgColor || '#1c1c1e';
-    widgetContainer.style.color = theme.textColor || '#ffffff';
-    widgetContainer.style.fontFamily = theme.fontFamily || "'Inter', sans-serif";
+    if (theme.bgColor) widgetContainer.style.backgroundColor = theme.bgColor;
+    if (theme.textColor) widgetContainer.style.color = theme.textColor;
+    if (theme.fontFamily) widgetContainer.style.fontFamily = theme.fontFamily;
     widgetTitle.innerText = theme.restaurantName || "Nasze Menu";
   });
 

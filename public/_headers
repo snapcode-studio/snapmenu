@@ -5,11 +5,14 @@
 /widget
   Access-Control-Allow-Origin: *
   Content-Security-Policy: frame-ancestors *
+  X-Frame-Options: ALLOWALL
 
 /widget.html
   Access-Control-Allow-Origin: *
   Content-Security-Policy: frame-ancestors *
+  X-Frame-Options: ALLOWALL
 
 /w/*
   Access-Control-Allow-Origin: *
   Content-Security-Policy: frame-ancestors *
+  X-Frame-Options: ALLOWALL

@@ -7,6 +7,8 @@ const widgetTitle = document.getElementById('widgetTitle');
 const fullMenuLink = document.getElementById('fullMenuLink');
 const widgetFilters = document.getElementById('widgetFilters');
 
+const BASE_URL = 'https://menu.getsnap.space';
+
 const urlParams = new URLSearchParams(window.location.search);
 let restaurantId = urlParams.get('id');
 
@@ -26,8 +28,8 @@ let activeFilter = 'all';
 if (!restaurantId) {
   widgetLoading.innerText = "Błąd: Brak ID restauracji.";
 } else {
-  // Config link
-  const menuUrl = `${window.location.origin}/menu.html?id=${restaurantId}`;
+  // Config link pointing explicitly to menu.getsnap.space
+  const menuUrl = `${BASE_URL}/menu.html?id=${restaurantId}`;
   fullMenuLink.href = menuUrl;
   
   // Theme
@@ -123,7 +125,7 @@ function renderCurrentState() {
     }
     if (pitchBtn) {
       pitchBtn.innerText = "Skonfiguruj menu dla swojej firmy";
-      pitchBtn.href = `${window.location.origin}/dashboard.html?claim=${encodeURIComponent(restaurantId || '')}`;
+      pitchBtn.href = `${BASE_URL}/dashboard.html?claim=${encodeURIComponent(restaurantId || '')}`;
     }
     
     // Generate mock items for background template preview

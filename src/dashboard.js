@@ -88,6 +88,15 @@ listenAuthState((user) => {
         lastSlugChange = snap.data().lastChange;
         slugInput.value = currentSlug;
         slugInput.style.borderColor = 'rgba(255,255,255,0.2)';
+      } else {
+        const urlParams = new URLSearchParams(window.location.search);
+        const claimSlug = urlParams.get('claim');
+        if (claimSlug && SLUG_REGEX.test(claimSlug)) {
+          slugInput.value = claimSlug;
+          slugMsg.style.color = '#38ef7d';
+          slugMsg.textContent = `Chcesz przejąć nazwę "${claimSlug}"? Zapisz nazwę i dodaj dania!`;
+          slugConfirmBtn.style.display = 'inline-block';
+        }
       }
     });
 
